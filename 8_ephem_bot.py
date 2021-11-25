@@ -39,6 +39,8 @@ def greet_user(update, context):
 
 def talk_to_me(update, context):
     user_text = update.message.text
+    if user_text == ephem.contellation:
+    
     print(user_text)
     update.message.reply_text(text)
 
