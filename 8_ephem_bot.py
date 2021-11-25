@@ -22,13 +22,7 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     filename='bot.log')
 
 
-PROXY = {
-    'proxy_url': 'socks5://t1.learn.python.ru:1080',
-    'urllib3_proxy_kwargs': {
-        'username': 'learn',
-        'password': 'python'
-    }
-}
+#
 
 
 def greet_user(update, context):
@@ -36,21 +30,30 @@ def greet_user(update, context):
     print(text)
     update.message.reply_text(text)
 
+def talk_to_planet(update, context):
+    if context.args:
+      message = 'Планета'
+    else:
+      print('Введите название планеты')
+      update.message.reply_text('Введи название планеты')  
+    
+
 
 def talk_to_me(update, context):
     user_text = update.message.text
-    if user_text == ephem.contellation:
-    
     print(user_text)
     update.message.reply_text(text)
 
 
+
 def main():
-    mybot = Updater("КЛЮЧ, КОТОРЫЙ НАМ ВЫДАЛ BotFather", request_kwargs=PROXY, use_context=True)
+    mybot = Updater("1975526291:AAEIioscryD16238awzo-_huIoCkgX5Akxs", use_context=True)
 
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
+    dp.add_handler(CommandHandler('planet', talk_to_planet))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
+    
 
     mybot.start_polling()
     mybot.idle()
